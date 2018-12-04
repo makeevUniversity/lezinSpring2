@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="lezin-spring:war">
+    <output-path>$PROJECT_DIR$/lezinspring_project/target</output-path>
+    <root id="archive" name="lezin-spring-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="lezin-spring:war exploded" />
+    </root>
+  </artifact>
+</component>
