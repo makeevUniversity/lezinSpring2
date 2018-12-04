@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+	   http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context.xsd
+	   http://www.springframework.org/schema/tx
+	   http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--it is necessary that this config placed here-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean id="jacksonHttpMessageConverter"
+                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="true"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!-- Обрабатывает HTTP GET запросы для указанного каталога более эффективно
+        для статических ресурсов -->
+    <mvc:resources mapping="/resources/**" location="/resources/" />
+
+    <!-- context:component-scan This tag will scan @Component, @Repository, @Service, @Controller
+         and also resolves @Autowired and @Qualifier -->
+    <context:component-scan base-package="project.ru" />
+
+    <!--
+    mvc:annotation-driven configures Spring MVC annotations
+    Support for validating @Controller inputs with @Valid, if a JSR-303 Provider is present on the classpath.
+    HttpMessageConverter support for @RequestBody method parameters and @ResponseBody method return values
+    from @RequestMapping or @ExceptionHandler methods.
+ -->
+    <mvc:annotation-driven/>
+
+    <!-- activate @Transactional JPA annotation -->
+    <tx:annotation-driven/>
+
+
+    <!-- ViewResolver bean config for mapping strings to jsp views -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!-- Example: a logical view name of 'showMessage' is mapped to '/WEB-INF/jsp/showMessage.jsp' -->
+        <property name="order" value="1" />
+        <property name="prefix" value="/WEB-INF/view" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+    <mvc:view-controller path="/about.html" view-name="/about/about"/>
+    <mvc:view-controller path="/error.html" view-name="/error/errorpage"/>
+    <mvc:view-controller path="/index.html" view-name="/index"/>
+    <mvc:view-controller path="/buyerList.html" view-name="/buyers/buyerList"/>
+    <mvc:view-controller path="/productList.html" view-name="/products/productList"/>
+    <mvc:view-controller path="/saleList.html" view-name="/sales/saleList"/>
+    <mvc:view-controller path="/discountList.html" view-name="/discounts/discountList"/>
+    <mvc:view-controller path="/sellerList.html" view-name="/sellers/sellerList"/>
+    <mvc:view-controller path="/addBuyer.html" view-name="/buyers/addBuyer"/>
+    <mvc:view-controller path="/addDiscount.html" view-name="/discounts/addDiscount"/>
+    <mvc:view-controller path="/addProduct.html" view-name="/products/addProduct"/>
+    <mvc:view-controller path="/addSeller.html" view-name="/sellers/addSeller"/>
+    <mvc:view-controller path="/addSale.html" view-name="/sales/addSale"/>
+    <mvc:view-controller path="/updateSaleEntity.html" view-name="/sales/updateSale"/>
+    <mvc:view-controller path="/updateBuyerEntity.html" view-name="/buyers/updateBuyer"/>
+    <mvc:view-controller path="/updateDiscountEntity.html" view-name="/discounts/updateDiscount"/>
+    <mvc:view-controller path="/updateSellerEntity.html" view-name="/sellers/updateSeller"/>
+    <mvc:view-controller path="/updateProductEntity.html" view-name="/products/updateProduct"/>
+
+
+</beans>
